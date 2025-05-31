@@ -46,6 +46,12 @@
             top: 0;
             z-index: 100;
             box-shadow: var(--shadow-md);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
         .header-container {
@@ -197,6 +203,12 @@
             margin-bottom: 4rem;
             position: relative;
             overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .hero:before {
@@ -213,6 +225,12 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto;
+            animation: scaleIn 0.8s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .hero h1 {
@@ -245,12 +263,20 @@
             font-size: 1rem;
             letter-spacing: 0.5px;
             box-shadow: var(--shadow-sm);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(245, 158, 11, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
         }
 
         .btn:hover {
             background-color: #e69008;
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
+            animation: none;
         }
 
         .btn-outline {
@@ -277,6 +303,7 @@
             margin-bottom: 4rem;
             position: relative;
             padding: 0 1rem;
+            animation: fadeIn 1s ease;
         }
 
         .section-title h2 {
@@ -313,6 +340,7 @@
             flex-wrap: wrap;
             gap: 0.8rem;
             margin-bottom: 2.5rem;
+            animation: fadeIn 1.2s ease;
         }
 
         .filter-btn {
@@ -339,6 +367,7 @@
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2.2rem;
             margin-bottom: 5rem;
+            animation: fadeIn 1.4s ease;
         }
 
         .product-card {
@@ -351,6 +380,12 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .product-card:hover {
@@ -977,6 +1012,16 @@
                 display: none;
             }
         }
+
+        /* Products section initially hidden */
+        .products-section {
+            display: none;
+        }
+        
+        .products-section.visible {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
     </style>
 </head>
 <body>
@@ -995,9 +1040,8 @@
             <nav>
                 <ul id="navMenu">
                     <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Products</a></li>
+                    <li><a href="#products">Products</a></li>
                     <li><a href="#">Categories</a></li>
-                    <li><a href="#">Deals</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
@@ -1006,7 +1050,7 @@
             <div class="header-actions">
                 <div class="search-container">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search products...">
+                    <input type="text" id="searchInput" placeholder="Search products...">
                 </div>
                 <div class="cart-icon" id="cartIcon">
                     <i class="fas fa-shopping-cart"></i>
@@ -1022,14 +1066,14 @@
             <h1>Premium Electronics for Everyone</h1>
             <p>Discover the latest gadgets, smartphones, laptops, and accessories at unbeatable prices with fast shipping and excellent customer service.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn">Shop Now</a>
-                <!--a href="#" class="btn btn-outline">View Deals</a-->
+                <a href="#" class="btn" id="shopNowBtn">Shop Now</a>
+                <a href="#" class="btn btn-outline">View Categories</a>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section class="products">
+    <section class="products products-section" id="products">
         <div class="container">
             <div class="section-title">
                 <h2>Featured Products</h2>
@@ -1064,7 +1108,7 @@
         </div>
         <div class="cart-total">
             <span>Total:</span>
-            <span id="cartTotal">$0.00</span>
+            <span id="cartTotal">0 CFA</span>
         </div>
         <button class="checkout-btn">Proceed to Checkout</button>
     </div>
@@ -1091,7 +1135,7 @@
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-right"></i> Products</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
@@ -1111,100 +1155,100 @@
                 <h3>Contact Us</h3>
                 <ul class="footer-links">
                     <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco</li>
-                    <li><i class="fas fa-phone"></i> (237) 671657357</li>
-                    <li><i class="fas fa-envelope"></i> engineerbesong@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+                    <li><i class="fas fa-envelope"></i> info@techhub.com</li>
                     <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 8PM</li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 TechHub. All rights reserved.</p>
+            <p>&copy; 2023 TechHub. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Product data
+        // Conversion rate: 1 USD = 580 CFA
+        const USD_TO_CFA = 580;
+        
+        // Extended product data (over 50 items)
         const products = [
-            {
-                id: 1,
-                name: "iPhone 14 Pro",
-                category: "smartphone",
-                price: 999.99,
-                description: "The latest iPhone with A16 Bionic chip and Super Retina XDR display. Capture incredible photos with the new camera system.",
-                image: "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.8,
-                tag: "New"
-            },
-            {
-                id: 2,
-                name: "Samsung Galaxy S23",
-                category: "smartphone",
-                price: 899.99,
-                description: "Powerful Android smartphone with Dynamic AMOLED display and advanced camera system for stunning photos.",
-                image: "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.7,
-                tag: "Popular"
-            },
-            {
-                id: 3,
-                name: "MacBook Pro 16-inch",
-                category: "laptop",
-                price: 2399.99,
-                description: "Professional laptop with M2 Pro chip and Liquid Retina XDR display. Perfect for creatives and developers.",
-                image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.9,
-                tag: "Best Seller"
-            },
-            {
-                id: 4,
-                name: "Dell XPS 15",
-                category: "laptop",
-                price: 1799.99,
-                description: "Sleek design with InfinityEdge display and powerful performance. Ideal for professionals on the go.",
-                image: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.6,
-                tag: "Top Rated"
-            },
-            {
-                id: 5,
-                name: "Sony WH-1000XM5",
-                category: "audio",
-                price: 349.99,
-                description: "Industry-leading noise cancellation headphones with premium sound quality and long battery life.",
-                image: "https://images.unsplash.com/photo-1664478546384-d57ffe74a78c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.8,
-                tag: "New"
-            },
-            {
-                id: 6,
-                name: "Apple AirPods Pro",
-                category: "audio",
-                price: 249.99,
-                description: "Active Noise Cancellation for immersive sound. Transparency mode for hearing your surroundings.",
-                image: "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.7,
-                tag: "Popular"
-            },
-            {
-                id: 7,
-                name: "Apple Watch Series 8",
-                category: "accessory",
-                price: 399.99,
-                description: "Advanced health features, always-on Retina display, and water resistance. Track your fitness goals.",
-                image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.6,
-                tag: "Best Seller"
-            },
-            {
-                id: 8,
-                name: "Samsung Galaxy Watch 5",
-                category: "accessory",
-                price: 279.99,
-                description: "Track your fitness goals with advanced health monitoring and long battery life. Perfect for active lifestyles.",
-                image: "https://images.unsplash.com/photo-1617043786391-7afb6c3f2f52?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                rating: 4.5,
-                tag: "Top Rated"
-            }
+            // Smartphones
+            { id: 1, name: "iPhone 14 Pro", category: "smartphone", price: 999.99, description: "The latest iPhone with A16 Bionic chip and Super Retina XDR display.", image: "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "New" },
+            { id: 2, name: "Samsung Galaxy S23", category: "smartphone", price: 899.99, description: "Powerful Android smartphone with Dynamic AMOLED display.", image: "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Popular" },
+            { id: 3, name: "Google Pixel 7 Pro", category: "smartphone", price: 899.99, description: "Advanced camera system with AI-powered photography features.", image: "https://images.unsplash.com/photo-1664474616385-8f81a94c9b3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "New" },
+            { id: 4, name: "OnePlus 11", category: "smartphone", price: 799.99, description: "Fast and smooth performance with Hasselblad camera.", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Value" },
+            { id: 5, name: "Xiaomi 13 Pro", category: "smartphone", price: 999.99, description: "Premium flagship with Leica camera system.", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "New" },
+            
+            // Laptops
+            { id: 6, name: "MacBook Pro 16-inch", category: "laptop", price: 2399.99, description: "Professional laptop with M2 Pro chip and Liquid Retina XDR display.", image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.9, tag: "Best Seller" },
+            { id: 7, name: "Dell XPS 15", category: "laptop", price: 1799.99, description: "Sleek design with InfinityEdge display and powerful performance.", image: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Top Rated" },
+            { id: 8, name: "HP Spectre x360", category: "laptop", price: 1499.99, description: "Convertible laptop with premium design and long battery life.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Popular" },
+            { id: 9, name: "Lenovo ThinkPad X1 Carbon", category: "laptop", price: 1699.99, description: "Business laptop with legendary durability and keyboard.", image: "https://images.unsplash.com/photo-1593642634524-b40b5baae6bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Durable" },
+            { id: 10, name: "Asus ROG Zephyrus G14", category: "laptop", price: 1599.99, description: "Gaming laptop with powerful GPU and compact design.", image: "https://images.unsplash.com/photo-1593642702909-3491c7e4736c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Gaming" },
+            
+            // Audio
+            { id: 11, name: "Sony WH-1000XM5", category: "audio", price: 349.99, description: "Industry-leading noise cancellation headphones with premium sound.", image: "https://images.unsplash.com/photo-1664478546384-d57ffe74a78c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "New" },
+            { id: 12, name: "Apple AirPods Pro", category: "audio", price: 249.99, description: "Active Noise Cancellation for immersive sound. Transparency mode.", image: "https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Popular" },
+            { id: 13, name: "Bose QuietComfort Earbuds", category: "audio", price: 279.99, description: "Premium noise cancelling true wireless earbuds.", image: "https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Comfort" },
+            { id: 14, name: "JBL Flip 6", category: "audio", price: 129.99, description: "Portable Bluetooth speaker with powerful sound and waterproof design.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Portable" },
+            { id: 15, name: "Sony SRS-XB43", category: "audio", price: 199.99, description: "Extra bass wireless speaker with party lights.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Party" },
+            
+            // Accessories
+            { id: 16, name: "Apple Watch Series 8", category: "accessory", price: 399.99, description: "Advanced health features and always-on Retina display.", image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Best Seller" },
+            { id: 17, name: "Samsung Galaxy Watch 5", category: "accessory", price: 279.99, description: "Track your fitness goals with advanced health monitoring.", image: "https://images.unsplash.com/photo-1617043786391-7afb6c3f2f52?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Top Rated" },
+            { id: 18, name: "Anker PowerCore 26800", category: "accessory", price: 79.99, description: "High-capacity portable charger for all devices.", image: "https://images.unsplash.com/photo-1606220588914-eb0d652b8e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Essential" },
+            { id: 19, name: "Logitech MX Master 3S", category: "accessory", price: 99.99, description: "Premium wireless mouse with ergonomic design.", image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Productivity" },
+            { id: 20, name: "Samsung T7 SSD 1TB", category: "accessory", price: 119.99, description: "Portable SSD with fast transfer speeds.", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.9, tag: "Storage" },
+            
+            // Additional items to reach over 50
+            { id: 21, name: "iPhone SE (2023)", category: "smartphone", price: 429.99, description: "Compact design with powerful A15 Bionic chip.", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Compact" },
+            { id: 22, name: "Samsung Galaxy A54", category: "smartphone", price: 449.99, description: "Mid-range smartphone with great camera and battery.", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Value" },
+            { id: 23, name: "Google Pixel 6a", category: "smartphone", price: 449.99, description: "Affordable Pixel with flagship camera quality.", image: "https://images.unsplash.com/photo-1659789683653-2d57d21c8fd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Camera" },
+            { id: 24, name: "Nothing Phone (1)", category: "smartphone", price: 499.99, description: "Unique design with transparent back and LED lights.", image: "https://images.unsplash.com/photo-1658327780908-8a0e6b0f9c7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.2, tag: "Unique" },
+            { id: 25, name: "Motorola Edge 30", category: "smartphone", price: 599.99, description: "Slim design with 144Hz display and powerful processor.", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Slim" },
+            
+            { id: 26, name: "MacBook Air M2", category: "laptop", price: 1199.99, description: "Ultra-thin laptop with Apple M2 chip and Retina display.", image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Thin" },
+            { id: 27, name: "Microsoft Surface Laptop 5", category: "laptop", price: 1299.99, description: "Premium Windows laptop with touch screen and great build quality.", image: "https://images.unsplash.com/photo-1593642532744-d377ab507dc8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Premium" },
+            { id: 28, name: "Acer Swift 3", category: "laptop", price: 799.99, description: "Lightweight laptop with AMD Ryzen processor.", image: "https://images.unsplash.com/photo-1593642702909-3491c7e4736c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Lightweight" },
+            { id: 29, name: "Lenovo Yoga 9i", category: "laptop", price: 1499.99, description: "Convertible laptop with rotating soundbar and premium design.", image: "https://images.unsplash.com/photo-1593642634524-b40b5baae6bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Convertible" },
+            { id: 30, name: "Dell Alienware x15", category: "laptop", price: 2499.99, description: "Ultra-thin gaming laptop with powerful graphics.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.9, tag: "Gaming" },
+            
+            { id: 31, name: "Sony WF-1000XM4", category: "audio", price: 279.99, description: "Premium true wireless earbuds with noise cancellation.", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Premium" },
+            { id: 32, name: "Beats Fit Pro", category: "audio", price: 199.99, description: "Secure-fit earbuds with active noise cancellation.", image: "https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Fitness" },
+            { id: 33, name: "Sennheiser Momentum 3", category: "audio", price: 349.99, description: "Wireless headphones with exceptional sound quality.", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Sound" },
+            { id: 34, name: "Jabra Elite 7 Pro", category: "audio", price: 199.99, description: "True wireless earbuds with advanced call technology.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Calls" },
+            { id: 35, name: "Bose SoundLink Flex", category: "audio", price: 149.99, description: "Portable Bluetooth speaker with waterproof design.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Outdoor" },
+            
+            { id: 36, name: "Fitbit Charge 5", category: "accessory", price: 179.99, description: "Advanced fitness tracker with built-in GPS and stress management.", image: "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Fitness" },
+            { id: 37, name: "Apple AirTag 4-Pack", category: "accessory", price: 99.99, description: "Track your everyday items with the Find My network.", image: "https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Tracking" },
+            { id: 38, name: "Samsung SmartTag+", category: "accessory", price: 39.99, description: "Smart tracker with AR finding and UWB technology.", image: "https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Smart" },
+            { id: 39, name: "Anker 735 Charger", category: "accessory", price: 69.99, description: "65W GaN charger with 3 ports for fast charging.", image: "https://images.unsplash.com/photo-1606220588914-eb0d652b8e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Charging" },
+            { id: 40, name: "Logitech MX Keys", category: "accessory", price: 99.99, description: "Wireless keyboard with smart illumination and comfortable typing.", image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Keyboard" },
+            
+            // More items to pass 50
+            { id: 41, name: "iPhone 13", category: "smartphone", price: 699.99, description: "Previous generation iPhone with great performance.", image: "https://images.unsplash.com/photo-1637157790111-3f4c3c3c3c3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Value" },
+            { id: 42, name: "Samsung Galaxy Z Flip 4", category: "smartphone", price: 999.99, description: "Foldable smartphone with compact design.", image: "https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Foldable" },
+            { id: 43, name: "OnePlus Nord 2T", category: "smartphone", price: 499.99, description: "Mid-range smartphone with flagship features.", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Mid-range" },
+            { id: 44, name: "Xiaomi Redmi Note 12", category: "smartphone", price: 299.99, description: "Budget smartphone with impressive features.", image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Budget" },
+            { id: 45, name: "ASUS ROG Phone 6", category: "smartphone", price: 999.99, description: "Gaming smartphone with high refresh rate display.", image: "https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Gaming" },
+            
+            { id: 46, name: "MSI Stealth GS77", category: "laptop", price: 2499.99, description: "Slim gaming laptop with powerful specs.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Gaming" },
+            { id: 47, name: "HP Envy x360", category: "laptop", price: 999.99, description: "Convertible laptop with AMD processor.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Convertible" },
+            { id: 48, name: "Lenovo Legion 5 Pro", category: "laptop", price: 1499.99, description: "Gaming laptop with high refresh rate display.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Gaming" },
+            { id: 49, name: "Dell Inspiron 16", category: "laptop", price: 899.99, description: "Everyday laptop with large display.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Everyday" },
+            { id: 50, name: "Acer Chromebook Spin 713", category: "laptop", price: 699.99, description: "Convertible Chromebook with high-resolution display.", image: "https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Chromebook" },
+            
+            { id: 51, name: "Bose QuietComfort 45", category: "audio", price: 329.99, description: "Premium noise cancelling headphones.", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Premium" },
+            { id: 52, name: "JBL Charge 5", category: "audio", price: 179.99, description: "Portable Bluetooth speaker with powerful sound.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Portable" },
+            { id: 53, name: "Sony SRS-XG300", category: "audio", price: 249.99, description: "Extra bass portable speaker with long battery life.", image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Bass" },
+            { id: 54, name: "Soundcore Liberty 3 Pro", category: "audio", price: 149.99, description: "True wireless earbuds with hybrid noise cancellation.", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.6, tag: "Value" },
+            { id: 55, name: "Beats Studio Buds", category: "audio", price: 149.99, description: "True wireless earbuds with active noise cancellation.", image: "https://images.unsplash.com/photo-1605464315542-bda3e2f4e605?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Style" },
+            
+            { id: 56, name: "Garmin Forerunner 955", category: "accessory", price: 499.99, description: "Advanced GPS running watch with training metrics.", image: "https://images.unsplash.com/photo-1576243345690-4e4b79b63288?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.7, tag: "Running" },
+            { id: 57, name: "Apple MagSafe Charger", category: "accessory", price: 39.99, description: "Wireless charger for iPhone with MagSafe technology.", image: "https://images.unsplash.com/photo-1606220588914-eb0d652b8e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.3, tag: "Charging" },
+            { id: 58, name: "Samsung Wireless Charger", category: "accessory", price: 49.99, description: "Fast wireless charger for Samsung devices.", image: "https://images.unsplash.com/photo-1606220588914-eb0d652b8e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.4, tag: "Charging" },
+            { id: 59, name: "SanDisk Extreme Portable SSD", category: "accessory", price: 149.99, description: "Durable portable SSD with high-speed transfers.", image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.8, tag: "Storage" },
+            { id: 60, name: "Belkin BoostCharge Pro", category: "accessory", price: 129.99, description: "3-in-1 wireless charger for Apple devices.", image: "https://images.unsplash.com/photo-1606220588914-eb0d652b8e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", rating: 4.5, tag: "Charging" }
         ];
 
         // DOM elements
@@ -1220,19 +1264,55 @@
         const filterBtns = document.querySelectorAll('.filter-btn');
         const mobileToggle = document.getElementById('mobileToggle');
         const navMenu = document.getElementById('navMenu');
+        const shopNowBtn = document.getElementById('shopNowBtn');
+        const searchInput = document.getElementById('searchInput');
+        const productsSection = document.querySelector('.products-section');
 
         // Shopping cart array
         let cart = [];
 
+        // Format price to CFA with commas
+        function formatPrice(priceUSD) {
+            const priceCFA = Math.round(priceUSD * USD_TO_CFA);
+            return priceCFA.toLocaleString('fr-FR') + ' CFA';
+        }
+
         // Render products
-        function renderProducts(filter = 'all') {
+        function renderProducts(filter = 'all', searchTerm = '') {
             productsGrid.innerHTML = '';
             
-            const filteredProducts = filter === 'all' 
-                ? products 
-                : products.filter(product => product.category === filter);
+            let filteredProducts = products;
             
+            // Apply category filter
+            if (filter !== 'all') {
+                filteredProducts = filteredProducts.filter(product => product.category === filter);
+            }
+            
+            // Apply search filter
+            if (searchTerm) {
+                const term = searchTerm.toLowerCase();
+                filteredProducts = filteredProducts.filter(product => 
+                    product.name.toLowerCase().includes(term) || 
+                    product.description.toLowerCase().includes(term)
+                );
+            }
+            
+            // Display message if no products found
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = `
+                    <div class="no-products" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <i class="fas fa-search fa-3x" style="margin-bottom: 1rem; color: var(--gray-500);"></i>
+                        <h3 style="color: var(--dark);">No products found</h3>
+                        <p style="color: var(--gray-500);">Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Render products
             filteredProducts.forEach(product => {
+                const priceCFA = formatPrice(product.price);
+                
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
@@ -1250,7 +1330,7 @@
                             <span> (${product.rating})</span>
                         </div>
                         <div class="product-bottom">
-                            <div class="product-price">$${product.price.toFixed(2)}</div>
+                            <div class="product-price">${priceCFA}</div>
                             <button class="add-to-cart" data-id="${product.id}">
                                 <i class="fas fa-plus"></i>
                             </button>
@@ -1300,7 +1380,7 @@
             
             if (cart.length === 0) {
                 cartItems.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-cart"></i><p>Your cart is empty</p></div>';
-                cartTotal.textContent = '$0.00';
+                cartTotal.textContent = '0 CFA';
                 return;
             }
             
@@ -1309,6 +1389,8 @@
             cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 total += itemTotal;
+                const priceCFA = formatPrice(item.price);
+                const itemTotalCFA = formatPrice(itemTotal);
                 
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
@@ -1318,7 +1400,7 @@
                     </div>
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)} × ${item.quantity}</div>
+                        <div class="cart-item-price">${priceCFA} × ${item.quantity}</div>
                         <div class="cart-item-actions">
                             <button class="quantity-btn minus" data-id="${item.id}">
                                 <i class="fas fa-minus"></i>
@@ -1336,7 +1418,7 @@
                 cartItems.appendChild(cartItem);
             });
             
-            cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartTotal.textContent = formatPrice(total);
             
             // Add event listeners to cart item buttons
             document.querySelectorAll('.quantity-btn.minus').forEach(button => {
@@ -1406,9 +1488,18 @@
             }
         }
 
+        // Show products section
+        function showProductsSection() {
+            productsSection.classList.add('visible');
+            // Scroll to products section
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            // Render products
+            renderProducts();
+        }
+
         // Initialize the page
         function init() {
-            renderProducts();
+            // Initially render no products (section is hidden)
             
             // Cart toggle
             cartIcon.addEventListener('click', () => {
@@ -1434,7 +1525,7 @@
                     // Add active class to clicked button
                     btn.classList.add('active');
                     // Filter products
-                    renderProducts(btn.dataset.filter);
+                    renderProducts(btn.dataset.filter, searchInput.value);
                 });
             });
             
@@ -1448,6 +1539,19 @@
                         toggleMobileMenu();
                     }
                 });
+            });
+            
+            // Shop Now button
+            shopNowBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showProductsSection();
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const filter = activeFilter ? activeFilter.dataset.filter : 'all';
+                renderProducts(filter, this.value);
             });
         }
 
